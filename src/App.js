@@ -3,12 +3,12 @@ import SingleCard from "./components/SingleCard";
 import "./App.css";
 
 const cardImages = [
-  { src: "/img/helmet-1.png", matched: false },
-  { src: "/img/potion-1.png", matched: false },
-  { src: "/img/ring-1.png", matched: false },
-  { src: "/img/scroll-1.png", matched: false },
-  { src: "/img/shield-1.png", matched: false },
-  { src: "/img/sword-1.png", matched: false },
+  { src: "/img/bradley.jpeg", matched: false },
+  { src: "/img/cobi-jones.jpeg", matched: false },
+  { src: "/img/lalas.jpeg", matched: false },
+  { src: "/img/landon-donovan.jpeg", matched: false },
+  { src: "/img/mcbride.jpeg", matched: false },
+  { src: "/img/dempsey.jpeg", matched: false },
 ];
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
   const [turns, setTurns] = useState(0);
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
+  const [disabled, setDisabled] = useState(false);
 
   //shuffle cards
   const shuffleCards = () => {
@@ -23,6 +24,8 @@ function App() {
       .sort(() => Math.random() - 0.5)
       .map((card) => ({ ...card, id: Math.random() }));
 
+    setChoiceOne(null);
+    setChoiceTwo(null);
     setCards(shuffledCards);
     setTurns(0);
   };
@@ -33,6 +36,9 @@ function App() {
 
   useEffect(() => {
     if (choiceOne && choiceTwo) {
+      // disallow choosing other cards
+      setDisabled(true);
+
       //matching cards
       if (choiceOne.src === choiceTwo.src) {
         setCards((prevCard) => {
@@ -57,12 +63,17 @@ function App() {
     setChoiceOne(null);
     setChoiceTwo(null);
     setTurns((prevTurns) => prevTurns + 1);
+    setDisabled(false);
   };
+
+  useEffect(() => {
+    shuffleCards();
+  }, []);
 
   return (
     <div className="App">
-      <h1>Matching Game</h1>
-      {turns}
+      <h1>US Soccer Legends Matching Game</h1>
+      <p>{turns}</p>
       <button onClick={shuffleCards}> New Game</button>
       <div className="card-grid">
         {cards.map((card) => (
@@ -71,6 +82,7 @@ function App() {
             card={card}
             handleChoice={handleChoice}
             flipped={card === choiceOne || card === choiceTwo || card.matched}
+            disabled={disabled}
           />
         ))}
       </div>
