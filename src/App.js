@@ -3,7 +3,7 @@ import SingleCard from "./components/SingleCard";
 import "./App.css";
 
 const cardImages = [
-  { src: "/img/bradley.jpeg", matched: false },
+  { src: "/img/bradley.png", matched: false },
   { src: "/img/cobi-jones.jpeg", matched: false },
   { src: "/img/lalas.jpeg", matched: false },
   { src: "/img/landon-donovan.jpeg", matched: false },
@@ -71,7 +71,7 @@ function App() {
   return (
     <div className="App">
       <h1>US Soccer Legends Matching Game</h1>
-      <p>{turns}</p>
+      <p>Score: {turns}</p>
       <button onClick={shuffleCards}> New Game</button>
       <div className="card-grid">
         {cards.map((card) => (

@@ -15,7 +15,7 @@ const SingleCard = ({ card, handleChoice, flipped, disabled }) => {
         <img
           className="back"
           onClick={handleClick}
-          src="/img/cover.png"
+          src="/img/cover1.png"
           alt="back"
         />
       </div>
