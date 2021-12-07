@@ -34,6 +34,8 @@ function App() {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   };
 
+  console.log(turns);
+
   useEffect(() => {
     if (choiceOne && choiceTwo) {
       // disallow choosing other cards
